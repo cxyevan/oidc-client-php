@@ -1,5 +1,5 @@
 {
-    "name": "maicol07/oidc-client",
+    "name": "bouffekai/oidc-client",
     "description": "OpenID Connect client",
     "keywords": ["OpenID Connect", "OIDC", "client", "OAuth 2", "SSO", "RFC6749", "RFC7009", "RFC7636", "RFC7662"],
     "license": "Apache-2.0",
@@ -8,9 +8,9 @@
         "ext-json": "*",
         "ext-curl": "*",
         "guzzlehttp/guzzle": "^7",
-        "illuminate/collections": "^8",
-        "illuminate/http": "^8",
-        "illuminate/support": "^8",
+        "illuminate/collections": "8.*",
+        "illuminate/http": "8.*",
+        "illuminate/support": "8.*",
         "lcobucci/clock": "^2",
         "lcobucci/jwt": "~4.1",
         "cse/helpers-session": "^1.1"
