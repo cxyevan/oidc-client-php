@@ -8,6 +8,9 @@
         "ext-json": "*",
         "ext-curl": "*",
         "guzzlehttp/guzzle": "^7",
+        "illuminate/collections": "^9",
+        "illuminate/http": "^9",
+        "illuminate/support": "^9",
         "lcobucci/clock": "^2",
         "lcobucci/jwt": "~4.1",
         "cse/helpers-session": "^1.1"
