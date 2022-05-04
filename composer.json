@@ -1,5 +1,5 @@
 {
-    "name": "bouffekai/oidc-client",
+    "name": "bouffekai/oidc-client-php",
     "description": "OpenID Connect client",
     "keywords": ["OpenID Connect", "OIDC", "client", "OAuth 2", "SSO", "RFC6749", "RFC7009", "RFC7636", "RFC7662"],
     "license": "Apache-2.0",
