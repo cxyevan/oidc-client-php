@@ -1,4 +1,6 @@
-<?php /** @noinspection PhpUnused */
+<?php
+
+/** @noinspection PhpUnused */
 
 /*
  * Copyright 2022 Maicol07 (https://maicol07.it)
@@ -30,6 +32,7 @@ trait Token
     private string $token_endpoint;
     private array $token_endpoint_auth_methods_supported;
     private ?string $refresh_token;
+    private array $claims;
 
     /**
      * Requests Access token with refresh token
@@ -75,8 +78,7 @@ trait Token
         string  $token_type_hint = '',
         ?string $client_id = null,
         ?string $client_secret = null
-    ): Collection
-    {
+    ): Collection {
         $data = ['token' => $token];
 
         if ($token_type_hint) {
@@ -102,8 +104,7 @@ trait Token
         string  $token_type_hint = '',
         ?string $client_id = null,
         ?string $client_secret = null
-    ): Collection
-    {
+    ): Collection {
         $data = ['token' => $token];
 
         if ($token_type_hint) {
@@ -151,6 +152,9 @@ trait Token
         $this->id_token = $token_response->get('id_token');
         $this->access_token = $token_response->get('access_token');
         $this->refresh_token = $token_response->get('refresh_token');
+
+        // additional code required by ADFS
+        $this->claims = $jwt->claims()->all();
 
         return true;
     }

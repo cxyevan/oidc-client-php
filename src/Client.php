@@ -30,7 +30,8 @@ use Maicol07\OpenIDConnect\Traits\Authorization;
 use Maicol07\OpenIDConnect\Traits\AutoDiscovery;
 use Maicol07\OpenIDConnect\Traits\DynamicRegistration;
 use Maicol07\OpenIDConnect\Traits\ImplictFlow;
-use Maicol07\OpenIDConnect\Traits\JWT;
+// use Maicol07\OpenIDConnect\Traits\JWT;
+use Maicol07\OpenIDConnect\Traits\ClientJWT as JWT;
 use Maicol07\OpenIDConnect\Traits\Token;
 
 /**
@@ -193,7 +194,8 @@ class Client
     {
         // protect against mix-up attacks
         // experimental feature, see https://tools.ietf.org/html/draft-ietf-oauth-iss-auth-resp-00
-        if ($this->authorization_response_iss_parameter_supported && $request->hasAny(['error', 'code', 'id_token'])
+        if (
+            $this->authorization_response_iss_parameter_supported && $request->hasAny(['error', 'code', 'id_token'])
             && $request->get('iss') === $this->issuer
         ) {
             throw new ClientException('Error: validation of iss response parameter failed');
@@ -236,7 +238,7 @@ class Client
     }
 
     /**
-     * Returns the user info
+     * Returns the user info from userinfo_endpoint
      *
      * @throws ClientException
      */
@@ -253,6 +255,17 @@ class Client
         }
 
         return new UserInfo($response->collect()->put('id_token', $this->id_token));
+    }
+
+    /**
+     * Return the user info from claims parsed from id_token
+     *
+     * @return UserInfo
+     */
+    public function getJWTUserInfo(): UserInfo
+    {
+        # get claims
+        return new UserInfo(collect($this->claims)->put('id_token', $this->id_token));
     }
 
     #[NoReturn]
